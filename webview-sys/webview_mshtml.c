@@ -24,6 +24,10 @@ DECLARE_HANDLE(DPI_AWARENESS_CONTEXT);
 #define DPI_AWARENESS_CONTEXT_SYSTEM_AWARE ((DPI_AWARENESS_CONTEXT)-2)
 #endif
 
+#if _MSC_VER < 1900
+#define snprintf _snprintf
+#endif
+
 struct mshtml_webview {
   const char *url;
   int width;
@@ -66,7 +70,7 @@ static inline BSTR webview_to_bstr(const char *s) {
 
 #define WEBVIEW_KEY_FEATURE_BROWSER_EMULATION                                  \
   L"Software\\Microsoft\\Internet "                                            \
-   "Explorer\\Main\\FeatureControl\\FEATURE_BROWSER_EMULATION"
+   L"Explorer\\Main\\FeatureControl\\FEATURE_BROWSER_EMULATION"
 
 static int webview_fix_ie_compat_mode() {
   HKEY hKey;
